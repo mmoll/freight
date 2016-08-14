@@ -15,5 +15,3 @@ before_script:
 script:
   - find bin lib -type f | xargs shellcheck -s sh
   - make check
-notifications:
-  irc: "chat.freenode.net#freight"

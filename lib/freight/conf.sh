@@ -36,7 +36,7 @@ do
     [ "$DIRNAME" = "/" ] && break
     DIRNAME="$(dirname "$DIRNAME")"
 done
-[ "$FREIGHT_CONF" -a -f "$FREIGHT_CONF" ] && . "$FREIGHT_CONF"
+[ "$FREIGHT_CONF" ] && [ -f "$FREIGHT_CONF" ] && . "$FREIGHT_CONF"
 if [ "$CONF" ]
 then
     if [ -f "$CONF" ]
