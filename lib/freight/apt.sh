@@ -207,6 +207,11 @@ EOF
 
     } >"$DISTCACHE/Release"
 
+    # Pinentry may fail on GnuPG 2.x without GPG_TTY, see
+    # https://github.com/freight-team/freight/issues/72
+    GPG_TTY=$(tty)
+    export GPG_TTY
+
     # Sign the top-level `Release` file with `gpg`, for each key and
     # concatenate signatures.
     for GPGKEY in $GPG; do
