@@ -18,10 +18,12 @@ setup() {
     egrep "^Components: comp main" ${FREIGHT_CACHE}/dists/example/InRelease
 }
 
-@test "freight-cache builds per-component Release file" {
+@test "freight-cache builds per-component Release/InRelease file" {
     freight_cache -v
     test -e ${FREIGHT_CACHE}/dists/example/comp/binary-amd64/Release
+    test -e ${FREIGHT_CACHE}/dists/example/comp/binary-amd64/InRelease
     test -e ${FREIGHT_CACHE}/dists/example/main/binary-amd64/Release
+    test -e ${FREIGHT_CACHE}/dists/example/main/binary-amd64/InRelease
 }
 
 @test "freight-cache builds pool" {
