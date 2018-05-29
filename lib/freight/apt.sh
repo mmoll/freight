@@ -224,7 +224,7 @@ EOF
         gpg --clearsign$([ "$TTY" ] || echo " --no-tty") --use-agent ${USERKEYS} \
             $([ "$GPG_PASSPHRASE_FILE" ] && echo " --batch$PINENTRY_LOOPBACK --passphrase-fd 1 --passphrase-file $GPG_PASSPHRASE_FILE") \
             $([ "$GPG_DIGEST_ALGO" ] && echo " --personal-digest-preferences $GPG_DIGEST_ALGO") \
-            -o"$DISTCACHE/InRelease" "$DISTCACHE/Release" || {
+            -o"$DISTCACHE/InRelease.gpg" "$DISTCACHE/Release" || {
         cat <<EOF
 # [freight] couldn't sign the repository, perhaps you need to run
 # [freight] gpg --gen-key and update the GPG setting in $CONF

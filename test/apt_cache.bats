@@ -18,10 +18,12 @@ setup() {
     egrep "^Components: comp main" ${FREIGHT_CACHE}/dists/example/InRelease
 }
 
-@test "freight-cache builds per-component Release file" {
+@test "freight-cache builds per-component Release/InRelease file" {
     freight_cache -v
     test -e ${FREIGHT_CACHE}/dists/example/comp/binary-amd64/Release
+    test -e ${FREIGHT_CACHE}/dists/example/comp/binary-amd64/InRelease
     test -e ${FREIGHT_CACHE}/dists/example/main/binary-amd64/Release
+    test -e ${FREIGHT_CACHE}/dists/example/main/binary-amd64/InRelease
 }
 
 @test "freight-cache builds pool" {
@@ -33,7 +35,7 @@ setup() {
 @test "freight-cache generates valid Release/InRelease signatures" {
     freight_cache -v
     gpg --verify ${FREIGHT_CACHE}/dists/example/Release.gpg ${FREIGHT_CACHE}/dists/example/Release
-    gpg --verify ${FREIGHT_CACHE}/dists/example/InRelease
+    gpg --verify ${FREIGHT_CACHE}/dists/example/InRelease.gpg ${FREIGHT_CACHE}/dists/example/InRelease
 }
 
 @test "freight-cache signs Release/InRelease with two keys" {
@@ -44,7 +46,7 @@ setup() {
     run grep -c GOODSIG /tmp/verify.out
     assert_output "2"
 
-    gpg --status-fd 1 --verify ${FREIGHT_CACHE}/dists/example/InRelease >/tmp/verify.out
+    gpg --status-fd 1 --verify ${FREIGHT_CACHE}/dists/example/InRelease.gpg ${FREIGHT_CACHE}/dists/example/InRelease >/tmp/verify.out
     run grep -c GOODSIG /tmp/verify.out
     assert_output "2"
 }
