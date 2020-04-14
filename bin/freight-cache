@@ -117,7 +117,7 @@ for DIR in $DIRS; do
     # whatever it wants.
     . "$LIB/$MANAGER.sh"
     SORT="$(sort -V <"/dev/null" 2>"/dev/null" && echo "sort -V" || echo "sort")"
-    find $FIND_L "$DIR" -type "f" -printf "%P\n" 2>"/dev/null" |
+    find "$FIND_L" "$DIR" -type "f" -printf "%P\n" 2>"/dev/null" |
         eval "$SORT" |
         eval "${MANAGER}_cache" "$DIST"
 
